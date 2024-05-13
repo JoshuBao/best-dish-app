@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		478AEA442BF2071400EE61B1 /* best_dish_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA432BF2071400EE61B1 /* best_dish_appApp.swift */; };
-		478AEA462BF2071400EE61B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA452BF2071400EE61B1 /* ContentView.swift */; };
 		478AEA482BF2071700EE61B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 478AEA472BF2071700EE61B1 /* Assets.xcassets */; };
 		478AEA4B2BF2071700EE61B1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 478AEA4A2BF2071700EE61B1 /* Preview Assets.xcassets */; };
 		478AEA552BF2071800EE61B1 /* best_dish_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA542BF2071800EE61B1 /* best_dish_appTests.swift */; };
 		478AEA5F2BF2071800EE61B1 /* best_dish_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA5E2BF2071800EE61B1 /* best_dish_appUITests.swift */; };
 		478AEA612BF2071800EE61B1 /* best_dish_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA602BF2071800EE61B1 /* best_dish_appUITestsLaunchTests.swift */; };
+		478AEA6E2BF2073200EE61B1 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA6D2BF2073200EE61B1 /* CameraView.swift */; };
+		478AEA722BF207B700EE61B1 /* NearbyDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA712BF207B700EE61B1 /* NearbyDishesView.swift */; };
+		478AEA742BF20B7400EE61B1 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA732BF20B7400EE61B1 /* CameraPreview.swift */; };
+		478AEA762BF20BB400EE61B1 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA752BF20BB300EE61B1 /* CameraManager.swift */; };
+		478AEA782BF20D7F00EE61B1 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA772BF20D7F00EE61B1 /* CameraViewModel.swift */; };
+		478AEA7A2BF21C8B00EE61B1 /* LabeledImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA792BF21C8B00EE61B1 /* LabeledImageStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +41,6 @@
 /* Begin PBXFileReference section */
 		478AEA402BF2071400EE61B1 /* best-dish-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "best-dish-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		478AEA432BF2071400EE61B1 /* best_dish_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = best_dish_appApp.swift; sourceTree = "<group>"; };
-		478AEA452BF2071400EE61B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		478AEA472BF2071700EE61B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		478AEA4A2BF2071700EE61B1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		478AEA502BF2071800EE61B1 /* best-dish-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "best-dish-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +48,12 @@
 		478AEA5A2BF2071800EE61B1 /* best-dish-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "best-dish-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		478AEA5E2BF2071800EE61B1 /* best_dish_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = best_dish_appUITests.swift; sourceTree = "<group>"; };
 		478AEA602BF2071800EE61B1 /* best_dish_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = best_dish_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		478AEA6D2BF2073200EE61B1 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		478AEA712BF207B700EE61B1 /* NearbyDishesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyDishesView.swift; sourceTree = "<group>"; };
+		478AEA732BF20B7400EE61B1 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		478AEA752BF20BB300EE61B1 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		478AEA772BF20D7F00EE61B1 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		478AEA792BF21C8B00EE61B1 /* LabeledImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledImageStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +104,15 @@
 		478AEA422BF2071400EE61B1 /* best-dish-app */ = {
 			isa = PBXGroup;
 			children = (
+				478AEA792BF21C8B00EE61B1 /* LabeledImageStorage.swift */,
+				478AEA772BF20D7F00EE61B1 /* CameraViewModel.swift */,
 				478AEA432BF2071400EE61B1 /* best_dish_appApp.swift */,
-				478AEA452BF2071400EE61B1 /* ContentView.swift */,
 				478AEA472BF2071700EE61B1 /* Assets.xcassets */,
 				478AEA492BF2071700EE61B1 /* Preview Content */,
+				478AEA6D2BF2073200EE61B1 /* CameraView.swift */,
+				478AEA712BF207B700EE61B1 /* NearbyDishesView.swift */,
+				478AEA732BF20B7400EE61B1 /* CameraPreview.swift */,
+				478AEA752BF20BB300EE61B1 /* CameraManager.swift */,
 			);
 			path = "best-dish-app";
 			sourceTree = "<group>";
@@ -257,8 +272,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				478AEA462BF2071400EE61B1 /* ContentView.swift in Sources */,
+				478AEA742BF20B7400EE61B1 /* CameraPreview.swift in Sources */,
+				478AEA722BF207B700EE61B1 /* NearbyDishesView.swift in Sources */,
+				478AEA6E2BF2073200EE61B1 /* CameraView.swift in Sources */,
+				478AEA782BF20D7F00EE61B1 /* CameraViewModel.swift in Sources */,
+				478AEA762BF20BB400EE61B1 /* CameraManager.swift in Sources */,
 				478AEA442BF2071400EE61B1 /* best_dish_appApp.swift in Sources */,
+				478AEA7A2BF21C8B00EE61B1 /* LabeledImageStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +445,8 @@
 				DEVELOPMENT_TEAM = N336C927R4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) Need camera access to capture photos of delicious meals.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) needs to save captured photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -454,6 +476,8 @@
 				DEVELOPMENT_TEAM = N336C927R4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) Need camera access to capture photos of delicious meals.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) needs to save captured photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
