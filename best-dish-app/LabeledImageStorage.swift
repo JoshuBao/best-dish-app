@@ -1,9 +1,4 @@
-//
-//  LabeledImageStorage.swift
-//  best-dish-app
-//
-//  Created by Joshua Cheng on 5/13/24.
-//
+// LabeledImageStorage.swift
 
 import Foundation
 

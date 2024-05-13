@@ -79,6 +79,12 @@ struct CameraView: View {
                            ImageLabelingView(image: .constant(capturedImage))
                        }
                    }
+            .onChange(of: viewModel.showImageLabeling) { newValue, _ in
+                if !newValue {
+                    // Reset the capturedImage when the ImageLabelingView is dismissed
+                    viewModel.capturedImage = nil
+                }
+            }
             .onAppear {
                 viewModel.setupBindings()
                 viewModel.requestCameraPermission()
@@ -118,6 +124,7 @@ struct ImageLabelingView: View {
     @Binding var image: UIImage
     @State private var foodDish = ""
     @State private var location = ""
+    @EnvironmentObject var viewModel: CameraViewModel
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
@@ -144,10 +151,15 @@ struct ImageLabelingView: View {
     }
     
     private func saveImageWithLabels() {
-        // Save the image with the associated labels (foodDish and location)
-        // You can save the image to the gallery or upload it to a server
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
+        let newLabeledImage = LabeledImage(imageData: imageData, foodDish: foodDish, location: location)
+        viewModel.saveLabeledImage(newLabeledImage)
         
+        // Reset the input fields
+        foodDish = ""
+        location = ""
         
+        // Dismiss the ImageLabelingView
         presentationMode.wrappedValue.dismiss()
     }
 }

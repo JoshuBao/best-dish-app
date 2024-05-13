@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct MyApp: App {
+    @StateObject private var cameraViewModel = CameraViewModel()
+    
     var body: some Scene {
         WindowGroup {
             TabView {
                 CameraView()
+                    .environmentObject(cameraViewModel)
                     .tabItem {
                         Text("") // Hide label
                             .imageScale(.large)
@@ -22,7 +25,9 @@ struct MyApp: App {
                                 Image(systemName: "camera")
                             )
                     }
+                
                 NearbyDishesView()
+                    .environmentObject(cameraViewModel)
                     .tabItem {
                         Text("") // Hide label
                             .imageScale(.large)
@@ -36,6 +41,3 @@ struct MyApp: App {
         }
     }
 }
-
-
-

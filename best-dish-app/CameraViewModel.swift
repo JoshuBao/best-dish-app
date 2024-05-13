@@ -21,13 +21,18 @@ class CameraViewModel: ObservableObject {
     
     @Published var capturedImage: UIImage?
     @Published var showImageLabeling = false
-
+    
+    @Published var labeledImages: [LabeledImage] = []
+    
+    private let labeledImageStorage = LabeledImageStorage()
+    
     
     var alertError: AlertError!
     var session: AVCaptureSession = .init()
     private var cancelables = Set<AnyCancellable>()
     
     init() {
+        loadLabeledImages()
         session = cameraManager.session
     }
     
@@ -98,16 +103,16 @@ class CameraViewModel: ObservableObject {
     }
     
     func captureImage() {
-           requestGalleryPermission()
-           
-           let permission = checkGalleryPermissionStatus()
-           if permission.rawValue != 2 {
-               cameraManager.captureImage()
-               DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                   self.showImageLabeling = true
-               }
-           }
-       }
+        requestGalleryPermission()
+        
+        let permission = checkGalleryPermissionStatus()
+        if permission.rawValue != 2 {
+            cameraManager.captureImage()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.showImageLabeling = true
+            }
+        }
+    }
     
     func requestGalleryPermission() {
         PHPhotoLibrary.requestAuthorization { status in
@@ -124,5 +129,13 @@ class CameraViewModel: ObservableObject {
     
     func checkGalleryPermissionStatus() -> PHAuthorizationStatus {
         return PHPhotoLibrary.authorizationStatus()
+    }
+    func saveLabeledImage(_ labeledImage: LabeledImage) {
+        labeledImageStorage.saveLabeledImage(labeledImage)
+        loadLabeledImages()
+    }
+    
+    private func loadLabeledImages() {
+        labeledImages = labeledImageStorage.loadLabeledImages()
     }
 }
