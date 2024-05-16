@@ -19,6 +19,9 @@
 		478AEA762BF20BB400EE61B1 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA752BF20BB300EE61B1 /* CameraManager.swift */; };
 		478AEA782BF20D7F00EE61B1 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA772BF20D7F00EE61B1 /* CameraViewModel.swift */; };
 		478AEA7A2BF21C8B00EE61B1 /* LabeledImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AEA792BF21C8B00EE61B1 /* LabeledImageStorage.swift */; };
+		47F933892BF6BF8F003F0814 /* YelpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F933882BF6BF8F003F0814 /* YelpService.swift */; };
+		47F9338B2BF6BFDA003F0814 /* RestaurantSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F9338A2BF6BFDA003F0814 /* RestaurantSearchViewController.swift */; };
+		47F9338D2BF6C484003F0814 /* RestaurantSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F9338C2BF6C484003F0814 /* RestaurantSearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		478AEA752BF20BB300EE61B1 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		478AEA772BF20D7F00EE61B1 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		478AEA792BF21C8B00EE61B1 /* LabeledImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledImageStorage.swift; sourceTree = "<group>"; };
+		47F933882BF6BF8F003F0814 /* YelpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpService.swift; sourceTree = "<group>"; };
+		47F9338A2BF6BFDA003F0814 /* RestaurantSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchViewController.swift; sourceTree = "<group>"; };
+		47F9338C2BF6C484003F0814 /* RestaurantSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,9 @@
 				478AEA712BF207B700EE61B1 /* NearbyDishesView.swift */,
 				478AEA732BF20B7400EE61B1 /* CameraPreview.swift */,
 				478AEA752BF20BB300EE61B1 /* CameraManager.swift */,
+				47F933882BF6BF8F003F0814 /* YelpService.swift */,
+				47F9338A2BF6BFDA003F0814 /* RestaurantSearchViewController.swift */,
+				47F9338C2BF6C484003F0814 /* RestaurantSearchViewModel.swift */,
 			);
 			path = "best-dish-app";
 			sourceTree = "<group>";
@@ -277,8 +286,11 @@
 				478AEA6E2BF2073200EE61B1 /* CameraView.swift in Sources */,
 				478AEA782BF20D7F00EE61B1 /* CameraViewModel.swift in Sources */,
 				478AEA762BF20BB400EE61B1 /* CameraManager.swift in Sources */,
+				47F9338D2BF6C484003F0814 /* RestaurantSearchViewModel.swift in Sources */,
 				478AEA442BF2071400EE61B1 /* best_dish_appApp.swift in Sources */,
 				478AEA7A2BF21C8B00EE61B1 /* LabeledImageStorage.swift in Sources */,
+				47F933892BF6BF8F003F0814 /* YelpService.swift in Sources */,
+				47F9338B2BF6BFDA003F0814 /* RestaurantSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,8 +457,11 @@
 				DEVELOPMENT_TEAM = N336C927R4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) Need camera access to capture photos of delicious meals.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) needs to save captured photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "best-dish-app Need camera access to capture photos of delicious meals.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to suggest nearby restaurants.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to suggest nearby restaurants.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to suggest nearby restaurants.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "best-dish-app needs to save captured photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -476,8 +491,11 @@
 				DEVELOPMENT_TEAM = N336C927R4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) Need camera access to capture photos of delicious meals.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) needs to save captured photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "best-dish-app Need camera access to capture photos of delicious meals.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to suggest nearby restaurants.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to suggest nearby restaurants.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to suggest nearby restaurants.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "best-dish-app needs to save captured photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

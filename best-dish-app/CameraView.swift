@@ -1,5 +1,6 @@
 
 import SwiftUI
+import CoreLocation
 
 struct CameraView: View {
     
@@ -9,7 +10,7 @@ struct CameraView: View {
     @State private var isScaled = false
     @State private var focusLocation: CGPoint = .zero
     @State private var currentZoomFactor: CGFloat = 1.0
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -75,10 +76,10 @@ struct CameraView: View {
                 }))
             }
             .sheet(isPresented: $viewModel.showImageLabeling) {
-                       if let capturedImage = viewModel.capturedImage {
-                           ImageLabelingView(image: .constant(capturedImage))
-                       }
-                   }
+                if let capturedImage = viewModel.capturedImage {
+                    ImageLabelingView(image: .constant(capturedImage))
+                }
+            }
             .onChange(of: viewModel.showImageLabeling) { newValue, _ in
                 if !newValue {
                     // Reset the capturedImage when the ImageLabelingView is dismissed
@@ -120,13 +121,15 @@ struct PhotoThumbnail: View {
         }
     }
 }
+
 struct ImageLabelingView: View {
     @Binding var image: UIImage
     @State private var foodDish = ""
     @State private var location = ""
+    @StateObject private var searchViewModel = RestaurantSearchViewModel()
     @EnvironmentObject var viewModel: CameraViewModel
     @Environment(\.presentationMode) private var presentationMode
-    
+
     var body: some View {
         VStack {
             Image(uiImage: image)
@@ -138,9 +141,21 @@ struct ImageLabelingView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            TextField("Location", text: $location)
+            TextField("Enter restaurant name", text: $searchViewModel.query)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+            
+            List(searchViewModel.businesses, id: \.name) { business in
+                Button(action: {
+                    searchViewModel.selectedBusiness = business
+                    location = business.name
+                    searchViewModel.query = business.name // Auto-fill the search bar with the selected restaurant name
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) // Hide the keyboard
+                }) {
+                    Text(business.name)
+                        .foregroundColor(.primary)
+                }
+            }
             
             Button("Save") {
                 saveImageWithLabels()
@@ -148,6 +163,9 @@ struct ImageLabelingView: View {
             .padding()
         }
         .navigationBarTitle("Label Image")
+        .onAppear {
+            searchViewModel.startUpdatingLocation()
+        }
     }
     
     private func saveImageWithLabels() {
