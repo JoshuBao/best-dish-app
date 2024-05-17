@@ -1,10 +1,3 @@
-//
-//  RestaurantSearchViewModel.swift
-//  best-dish-app
-//
-//  Created by Joshua Cheng on 5/16/24.
-
-
 import SwiftUI
 import Combine
 import CoreLocation
@@ -12,7 +5,8 @@ import CoreLocation
 class RestaurantSearchViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var dishName: String = ""
     @Published var query: String = ""
-    @Published var businesses: [YelpBusiness] = []
+    @Published var allBusinesses: [YelpBusiness] = []
+    @Published var filteredBusinesses: [YelpBusiness] = []
     @Published var selectedBusiness: YelpBusiness?
     @Published var location: CLLocation?
     var yelpService = YelpService()
@@ -27,10 +21,11 @@ class RestaurantSearchViewModel: NSObject, ObservableObject, CLLocationManagerDe
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
+
         $query
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
             .sink { [weak self] query in
-                self?.searchBusinesses(query: query)
+                self?.filterBusinesses(query: query)
             }
             .store(in: &cancellables)
     }
@@ -39,10 +34,21 @@ class RestaurantSearchViewModel: NSObject, ObservableObject, CLLocationManagerDe
         locationManager?.startUpdatingLocation()
     }
 
-    func searchBusinesses(query: String) {
-        guard let location = location, !query.isEmpty else { return }
-        yelpService.searchBusinesses(query: query, location: location) { [weak self] businesses in
-            self?.businesses = businesses
+    func fetchNearbyBusinesses() {
+        guard let location = location else { return }
+        yelpService.fetchNearbyBusinesses(location: location) { [weak self] businesses in
+            DispatchQueue.main.async {
+                self?.allBusinesses = businesses
+                self?.filterBusinesses(query: self?.query ?? "")
+            }
+        }
+    }
+
+    func filterBusinesses(query: String) {
+        if query.isEmpty {
+            filteredBusinesses = allBusinesses
+        } else {
+            filteredBusinesses = allBusinesses.filter { $0.name.lowercased().contains(query.lowercased()) }
         }
     }
 
@@ -50,11 +56,25 @@ class RestaurantSearchViewModel: NSObject, ObservableObject, CLLocationManagerDe
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             self.location = location
+            fetchNearbyBusinesses()
             locationManager?.stopUpdatingLocation() // Stop updating to save battery
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location: \(error.localizedDescription)")
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            print("Location access denied.")
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+        @unknown default:
+            fatalError()
+        }
     }
 }

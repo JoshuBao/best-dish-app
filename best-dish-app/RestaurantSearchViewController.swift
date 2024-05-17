@@ -6,7 +6,7 @@
 //
 
 // RestaurantSearchViewController.swift
-// RestaurantSearchViewController.swift
+
 
 import UIKit
 import CoreLocation
@@ -14,7 +14,8 @@ import CoreLocation
 class RestaurantSearchViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     var textField: UITextField!
     var tableView: UITableView!
-    var businesses: [YelpBusiness] = []
+    var allBusinesses: [YelpBusiness] = []
+    var filteredBusinesses: [YelpBusiness] = []
     var yelpService = YelpService()
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
@@ -50,36 +51,51 @@ class RestaurantSearchViewController: UIViewController, UITextFieldDelegate, UIT
         if let location = locations.last {
             currentLocation = location
             locationManager.stopUpdatingLocation() // Stop updating to save battery
+            fetchNearbyBusinesses()
+        }
+    }
+
+    func fetchNearbyBusinesses() {
+        guard let location = currentLocation else { return }
+        yelpService.fetchNearbyBusinesses(location: location) { [weak self] businesses in
+            self?.allBusinesses = businesses
+            self?.filterBusinesses(query: self?.textField.text ?? "")
         }
     }
 
     @objc func textFieldDidChange() {
-        guard let query = textField.text, !query.isEmpty, let location = currentLocation else {
-            businesses.removeAll()
+        guard let query = textField.text else {
+            filteredBusinesses.removeAll()
             tableView.reloadData()
             return
         }
 
-        yelpService.searchBusinesses(query: query, location: location) { [weak self] businesses in
-            self?.businesses = businesses
-            self?.tableView.reloadData()
+        filterBusinesses(query: query)
+    }
+
+    func filterBusinesses(query: String) {
+        if query.isEmpty {
+            filteredBusinesses = allBusinesses
+        } else {
+            filteredBusinesses = allBusinesses.filter { $0.name.lowercased().contains(query.lowercased()) }
         }
+        tableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return businesses.count
+        return filteredBusinesses.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let business = businesses[indexPath.row]
+        let business = filteredBusinesses[indexPath.row]
         cell.textLabel?.text = business.name
         cell.detailTextLabel?.text = business.location.address1 ?? business.location.city
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let business = businesses[indexPath.row]
+        let business = filteredBusinesses[indexPath.row]
         textField.text = business.name
         tableView.isHidden = true
     }
@@ -89,7 +105,7 @@ class RestaurantSearchViewController: UIViewController, UITextFieldDelegate, UIT
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        businesses.removeAll()
+        filteredBusinesses.removeAll()
         tableView.reloadData()
         return true
     }

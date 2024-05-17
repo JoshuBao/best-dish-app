@@ -1,4 +1,3 @@
-
 import SwiftUI
 import CoreLocation
 
@@ -38,7 +37,6 @@ struct CameraView: View {
                                 self.currentZoomFactor = min(max(self.currentZoomFactor, 0.5), 10)
                                 self.viewModel.zoom(with: currentZoomFactor)
                             })
-                        //.animation(.easeInOut, value: 0.5)
                         
                         if isFocused {
                             FocusView(position: $focusLocation)
@@ -145,7 +143,7 @@ struct ImageLabelingView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            List(searchViewModel.businesses, id: \.name) { business in
+            List(searchViewModel.filteredBusinesses, id: \.id) { business in
                 Button(action: {
                     searchViewModel.selectedBusiness = business
                     location = business.name
@@ -181,6 +179,7 @@ struct ImageLabelingView: View {
         presentationMode.wrappedValue.dismiss()
     }
 }
+
 struct CaptureButton: View {
     var action: () -> Void
     
